@@ -1,0 +1,40 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>dev.gaphunter.envdiffcompanion</id>
+    <name>Env Diff Companion</name>
+    <vendor>Gap Hunter Labs</vendor>
+    <description><![CDATA[
+        <p>Select exactly two env-style files in the Project view --
+        <code>.env</code> vs <code>.env.example</code>,
+        <code>.env.development</code> vs <code>.env.production</code>,
+        anything with <code>KEY=VALUE</code> lines -- run "Compare Env
+        Files", and get a real report of which keys are missing from
+        each side. The #1 real-world .env bug this catches: a new
+        environment variable added to <code>.env</code> during
+        development and never added to <code>.env.example</code>, so
+        the next person to set up the project has no idea it's
+        required.</p>
+        <p>Pure text comparison, not a values diff -- deliberately.
+        Different values per environment (a dev vs. prod database URL)
+        are usually intentional, not a bug; only presence/absence of a
+        key is a real signal worth flagging.</p>
+        <p>100% local -- no network call, no account, no telemetry.
+        Works on any file, `.env`-named or not; never depends on a
+        `.env` PSI plugin being installed.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <actions>
+        <action id="EnvDiffCompanion.CompareEnvFiles"
+                class="dev.gaphunter.envdiffcompanion.actions.CompareEnvFilesAction"
+                text="Compare Env Files"
+                description="Compares two selected env-style files and reports which keys are missing from each side">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Env Diff Companion" displayType="BALLOON"/>
+    </extensions>
+</idea-plugin>
