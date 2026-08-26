@@ -19,14 +19,14 @@ import com.intellij.psi.PsiFileFactory
 import com.intellij.psi.PsiManager
 import dev.gaphunter.envdiffcompanion.diff.EnvDiffer
 import dev.gaphunter.envdiffcompanion.report.DiffReportWriter
+import dev.gaphunter.envdiffcompanion.review.ReviewPrompt
 
 /**
  * Project-view context-menu entry point. Requires exactly two files
  * selected -- uses [CommonDataKeys.VIRTUAL_FILE_ARRAY], the same
  * fundamental, universally-populated key Bean Copy Companion switched
  * to after `LangDataKeys.PSI_ELEMENT_ARRAY` turned out to never be
- * populated by the real Project View (see `SDK_GOTCHAS.md` §17) --
- * never the unverified key again.
+ * populated by the real Project View -- never the unverified key again.
  */
 class CompareEnvFilesAction : AnAction() {
 
@@ -50,6 +50,10 @@ class CompareEnvFilesAction : AnAction() {
 
             ApplicationManager.getApplication().invokeLater {
                 writeReport(project, fileA, report)
+                // Every completed comparison is a real use -- no "no-op"
+                // branch here (both "differences found" and "same keys"
+                // are a real, useful answer to the question the user asked).
+                ReviewPrompt.recordHit(project)
                 val message = if (result.hasDifferences) {
                     "${result.onlyInA.size} key(s) missing from ${fileB.name}, ${result.onlyInB.size} missing from ${fileA.name} -- see env-diff-report.md."
                 } else {
