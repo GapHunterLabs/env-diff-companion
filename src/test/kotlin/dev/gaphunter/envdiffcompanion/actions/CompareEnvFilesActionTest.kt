@@ -10,9 +10,9 @@ import com.intellij.testFramework.fixtures.BasePlatformTestCase
  * [com.intellij.openapi.actionSystem.DataContext] carrying
  * [CommonDataKeys.VIRTUAL_FILE_ARRAY] -- the SAME key Bean Copy
  * Companion had to switch to after `LangDataKeys.PSI_ELEMENT_ARRAY`
- * turned out to never be populated by the real Project View
- * (`SDK_GOTCHAS.md` §17). Written here from the start instead of
- * discovering the same bug live a second time.
+ * turned out to never be populated by the real Project View. Written
+ * here from the start instead of discovering the same bug live a
+ * second time.
  */
 class CompareEnvFilesActionTest : BasePlatformTestCase() {
 
