@@ -12,8 +12,7 @@ Ports a pattern that's genuinely popular elsewhere — env-diff/env-sync
 tooling exists across other editors and CLI tools — with no real
 equivalent anywhere in JetBrains Marketplace (confirmed by search
 before building this, not assumed). A deliberate "port a proven
-concept" bet — see `CONSTITUTION.md` §1 for the documented-exception
-discipline this follows (same treatment as Refactor Simulator/Bean
+concept" bet — the same documented-exception discipline this follows (same treatment as Refactor Simulator/Bean
 Copy Companion/Turbo Log Companion/Change Case Companion/JSON to Code
 Companion).
 
